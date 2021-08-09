@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     private UserRepo userRepo;
 
-    @GetMapping()
+    @GetMapping("")
     public String userList(Model model) {
         model.addAttribute("users", userRepo.findAll());
 
