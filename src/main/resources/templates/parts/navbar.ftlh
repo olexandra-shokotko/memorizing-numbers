@@ -13,6 +13,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/user">User list</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/add-verse">Add verse</a>
+                </li>
             </#if>
         </ul>
 
