@@ -5,8 +5,15 @@
     <div class="jumbotron">
         <form method="post">
             <div>
-                <label class="col-sm-5 col-form-label navbar-brand mb-2">Enter phone number</label>
+                <label class="col-form-label navbar-brand mb-2">Enter phone number</label>
                 <input type="text" name="number" class="form-control col-sm-7" placeholder="Phone number" />
+            </div>
+            <div>
+                <label class="col-form-label navbar-brand mt-3">Verse language</label>
+                <div>
+                    <label><input type="radio" name="language" value="english">English</label>
+                    <label><input type="radio" name="language" value="russian">Russian</label>
+                </div>
             </div>
             <hr class="my-4">
 

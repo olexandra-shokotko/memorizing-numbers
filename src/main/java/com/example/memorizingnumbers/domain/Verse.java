@@ -13,6 +13,7 @@ public class Verse {
 
     private String author;
     private String name;
+    private String language;
 
     @OneToMany(mappedBy = "verse")
     private Set<Line> lines;
@@ -43,6 +44,14 @@ public class Verse {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public Set<Line> getLines() {

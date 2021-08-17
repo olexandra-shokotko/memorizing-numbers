@@ -41,8 +41,9 @@ public class VerseController {
     public String storeVerse(@RequestParam String verseName,
                              @RequestParam String author,
                              @RequestParam String verse,
+                             @RequestParam String language,
                              Map<String, Object> model) {
-        verseService.addVerse(verseName, author, verse);
+        verseService.addVerse(verseName, author, verse, language);
 
         return "redirect:/verses";
     }

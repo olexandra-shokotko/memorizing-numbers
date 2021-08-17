@@ -8,6 +8,7 @@
         <tr>
             <th>Name</th>
             <th>Author</th>
+            <th>Language</th>
             <#--<th>Verse</th>-->
             <th></th>
         </tr>
@@ -17,6 +18,7 @@
             <tr>
                 <td>${verse.name}</td>
                 <td>${verse.author}</td>
+                <td>${verse.language}</td>
 
        <#--         <#list lines as line>
                     <td>${line.text}</td>

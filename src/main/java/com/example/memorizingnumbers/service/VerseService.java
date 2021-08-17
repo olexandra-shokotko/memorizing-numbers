@@ -17,10 +17,11 @@ public class VerseService {
     @Autowired
     private LineRepo lineRepo;
 
-    public void addVerse(String name, String author, String text) {
+    public void addVerse(String name, String author, String text, String language) {
         Verse verse = new Verse();
         verse.setAuthor(author);
         verse.setName(name);
+        verse.setLanguage(language);
         verseRepo.save(verse);
         String[] lines = text.split(System.getProperty("line.separator"));
 

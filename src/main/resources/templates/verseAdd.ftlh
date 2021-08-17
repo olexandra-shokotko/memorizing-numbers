@@ -6,7 +6,7 @@
 
         <form action="/add-verse" method="post">
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Verse Name :</label>
+                <label class="col-sm-2 col-form-label">Verse Name:</label>
                 <div class="col-sm-6">
                     <input type="text" name="verseName" class="form-control" placeholder="Verse name" />
                 </div>
@@ -21,6 +21,13 @@
                 <label class="col-sm-2 col-form-label">Verse:</label>
                 <div class="col-sm-6">
                     <textarea type="text" name="verse" class="form-control" placeholder="Verse"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Language:</label>
+                <div class="col-sm-6">
+                    <label><input type="radio" name="language" value="english">English</label>
+                    <label><input type="radio" name="language" value="russian">Russian</label>
                 </div>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
