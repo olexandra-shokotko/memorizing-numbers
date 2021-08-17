@@ -17,10 +17,10 @@ public class VerseService {
     @Autowired
     private LineRepo lineRepo;
 
-    public void addVerse(String text) {
+    public void addVerse(String name, String author, String text) {
         Verse verse = new Verse();
-        verse.setAuthor("A");
-        verse.setName("abc");
+        verse.setAuthor(author);
+        verse.setName(name);
         verseRepo.save(verse);
         String[] lines = text.split(System.getProperty("line.separator"));
 
@@ -44,9 +44,8 @@ public class VerseService {
     }
 
     private String calcSignature(String text) {
-        String text1 = text.replaceAll("[^a-zA-Z\\s]","");
+        String text1 = text.replaceAll("[^a-zA-Zа-яА-Я\\s]","");
         String[] words = text1.split("\\s+");
-//        String[] words = text1.split("[^\\\\w']+");
         ArrayList<String> wordsLen = new ArrayList<>();
 
         for (String w : words) {
