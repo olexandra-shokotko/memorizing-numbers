@@ -27,13 +27,6 @@ public class VerseController {
 
     @GetMapping("/add-verse")
     public String addVerse() {
-//        try {
-//            verseService.addVerse(loadFromFile());
-//
-//        }catch (Exception ex) {
-//            return "temp";
-//        }
-
         return "verseAdd";
     }
 
@@ -51,12 +44,28 @@ public class VerseController {
     @GetMapping("/verses")
     public String versesList(Model model) {
         model.addAttribute("verses", verseRepo.findAll());
-//        model.addAttribute("lines", lineRepo.);
 
         return "versesList";
     }
 
-//    public String loadFromFile() throws IOException {
-//        return new String(Files.readAllBytes(Paths.get("src/main/resources/verse.txt")));
-//    }
+    @GetMapping("/result")
+    public String resultVerse() {
+        return "result";
+    }
+
+    @GetMapping("/find-verse")
+    public String main() {
+        return "main";
+    }
+
+    @PostMapping("/find-verse")
+    public String findVerse(@RequestParam String phoneNumber,
+                             /*@RequestParam String language,
+                             @RequestParam String length,*/
+                             Map<String, Object> model) {
+        verseService.findVerse();
+        String signature = verseService.getSignature(phoneNumber);
+
+        return "redirect:/result";
+    }
 }

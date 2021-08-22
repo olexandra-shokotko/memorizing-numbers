@@ -9,9 +9,4 @@ public class MainController {
     public String greeting() {
         return "greeting";
     }
-
-    @GetMapping("/main")
-    public String main() {
-        return "main";
-    }
 }

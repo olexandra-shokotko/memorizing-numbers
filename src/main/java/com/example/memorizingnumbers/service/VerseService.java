@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class VerseService {
@@ -54,5 +56,15 @@ public class VerseService {
         }
 
         return String.join("_", wordsLen);
+    }
+
+    public void findVerse() {
+    }
+
+    public String getSignature(String phoneNumber) {
+        String[] strSplit = phoneNumber.split("");
+        ArrayList<String> phoneNumberArray = new ArrayList<String>(Arrays.asList(strSplit));
+
+        return String.join("_", phoneNumberArray);
     }
 }
