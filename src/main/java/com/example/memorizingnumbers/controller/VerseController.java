@@ -3,14 +3,18 @@ package com.example.memorizingnumbers.controller;
 import com.example.memorizingnumbers.repository.LineRepo;
 import com.example.memorizingnumbers.repository.VerseRepo;
 import com.example.memorizingnumbers.service.VerseService;
+import jdk.nashorn.internal.objects.annotations.Property;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 @Controller
@@ -24,6 +28,9 @@ public class VerseController {
 
     @Autowired
     private LineRepo lineRepo;
+
+    @Property
+    private String res;
 
     @GetMapping("/add-verse")
     public String addVerse() {
@@ -49,7 +56,8 @@ public class VerseController {
     }
 
     @GetMapping("/result")
-    public String resultVerse() {
+    public String resultVerse(Model model) {
+//        model.addAttribute("res", res);
         return "result";
     }
 
@@ -62,9 +70,10 @@ public class VerseController {
     public String findVerse(@RequestParam String phoneNumber,
                              /*@RequestParam String language,
                              @RequestParam String length,*/
-                             Map<String, Object> model) {
-        verseService.findVerse();
+                             Map<String, Object> model
+                             /*Model model*/) {
         String signature = verseService.getSignature(phoneNumber);
+        String res = verseService.findVerse(signature);
 
         return "redirect:/result";
     }
