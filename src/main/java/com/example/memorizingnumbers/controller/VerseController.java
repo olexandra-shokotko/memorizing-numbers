@@ -1,5 +1,6 @@
 package com.example.memorizingnumbers.controller;
 
+import com.example.memorizingnumbers.domain.Line;
 import com.example.memorizingnumbers.repository.LineRepo;
 import com.example.memorizingnumbers.repository.VerseRepo;
 import com.example.memorizingnumbers.service.VerseService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Map;
 
 @Controller
@@ -55,11 +57,11 @@ public class VerseController {
         return "versesList";
     }
 
-    @GetMapping("/result")
-    public String resultVerse(Model model) {
-//        model.addAttribute("res", res);
-        return "result";
-    }
+//    @GetMapping("/result")
+//    public String resultVerse(Model model) {
+////        model.addAttribute("res", res);
+//        return "result";
+//    }
 
     @GetMapping("/find-verse")
     public String main() {
@@ -70,11 +72,13 @@ public class VerseController {
     public String findVerse(@RequestParam String phoneNumber,
                              /*@RequestParam String language,
                              @RequestParam String length,*/
-                             Map<String, Object> model
+                             Model model
                              /*Model model*/) {
         String signature = verseService.getSignature(phoneNumber);
-        String res = verseService.findVerse(signature);
+        ArrayList<ArrayList<Line>> result = verseService.findVerse(signature);
+//        ArrayList<Line> r = res.get(0);
+        model.addAttribute("result", result);
 
-        return "redirect:/result";
+        return "result";
     }
 }

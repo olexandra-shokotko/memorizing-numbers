@@ -62,4 +62,8 @@ public class Line {
     public void setVerse(Verse verse) {
         this.verse = verse;
     }
+
+    public int getNumberOfWords() {
+        return signature.split("\\d+").length;
+    }
 }

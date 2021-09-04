@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class VerseService {
@@ -58,7 +59,63 @@ public class VerseService {
         return String.join("_", wordsLen);
     }
 
-    public String findVerse(String phoneNumberSignature) {
+    private ArrayList<Line> getLinesNeededLength(ArrayList<Line> lines, int startIndex, int numberOfWords) {
+        int wordsCounter = 0;
+        int index = startIndex;
+        ArrayList<Line> result = new ArrayList<>();
+
+        while (index < lines.size() && wordsCounter < numberOfWords) {
+            result.add(lines.get(index));
+            wordsCounter += lines.get(index).getNumberOfWords();
+            index++;
+        }
+
+        return wordsCounter >= numberOfWords ? result : null;
+    }
+
+    private ArrayList<ArrayList<Line>> findLinesWithSignature(ArrayList<Line> lines, String signature) {
+        int numberOfWords = signature.split("\\d+").length;
+        ArrayList<ArrayList<Line>> result = new ArrayList<>();
+
+        for (int i = 0; i < lines.size(); i++) {
+            ArrayList<Line> linesForCheck = getLinesNeededLength(lines, i, numberOfWords);
+
+            if (linesForCheck == null) {
+                break;
+            }
+
+            String linesSignature = "";
+            for (Line line : linesForCheck) {
+//                linesSignature = "";
+                if (linesSignature.length() == 0) {
+                    linesSignature = line.getSignature();
+                }else {
+                    linesSignature = String.join("_", linesSignature, line.getSignature());
+                }
+            }
+
+            if (linesSignature.startsWith(signature)) {
+                result.add(linesForCheck);
+            }
+        }
+
+        return result;
+    }
+
+    public ArrayList<ArrayList<Line>> findVerse(String neededSignature) {
+        List<Verse> verses = verseRepo.findAll();
+        ArrayList<ArrayList<Line>> result = null;
+        for (Verse verse : verses) {
+             result = findLinesWithSignature(new ArrayList<Line>(verse.getLines()), neededSignature);
+            if (result.size() > 0) {
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    public String findVerse2(String phoneNumberSignature) {
         List<Line> lines = lineRepo.findAll();
         String signature = "";
         Long lineId;

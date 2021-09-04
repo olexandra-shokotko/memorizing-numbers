@@ -15,7 +15,8 @@ public class Verse {
     private String name;
     private String language;
 
-    @OneToMany(mappedBy = "verse")
+    @OneToMany(mappedBy = "verse", fetch = FetchType.EAGER)
+    @OrderBy("id")
     private Set<Line> lines;
 
     public Verse() {
