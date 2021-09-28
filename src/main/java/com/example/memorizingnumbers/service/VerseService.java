@@ -74,7 +74,13 @@ public class VerseService {
     }
 
     private ArrayList<ArrayList<Line>> findLinesWithSignature(ArrayList<Line> lines, String signature) {
-        int numberOfWords = signature.split("\\d+").length;
+        int numberOfWords;
+        if (signature.length() == 1) {
+            numberOfWords = 1;
+        }else {
+            numberOfWords = signature.split("\\d+").length;
+        }
+
         ArrayList<ArrayList<Line>> result = new ArrayList<>();
 
         for (int i = 0; i < lines.size(); i++) {
@@ -86,7 +92,6 @@ public class VerseService {
 
             String linesSignature = "";
             for (Line line : linesForCheck) {
-//                linesSignature = "";
                 if (linesSignature.length() == 0) {
                     linesSignature = line.getSignature();
                 }else {
@@ -102,47 +107,25 @@ public class VerseService {
         return result;
     }
 
-    public ArrayList<ArrayList<Line>> findVerse(String neededSignature) {
+    public ArrayList<ArrayList<Line>> findVerse(String neededSignature/*, String language*/) {
         List<Verse> verses = verseRepo.findAll();
-        ArrayList<ArrayList<Line>> result = null;
+//        List<Verse> versesGivenLang = verseRepo.findVersesByLanguage(language);
+        ArrayList<ArrayList<Line>> result = new ArrayList<>();
+        ArrayList<DetectedVerseDto> detectedVerses = new ArrayList<>();
+
         for (Verse verse : verses) {
-             result = findLinesWithSignature(new ArrayList<Line>(verse.getLines()), neededSignature);
-            if (result.size() > 0) {
-                break;
-            }
+             result.addAll(findLinesWithSignature(new ArrayList<Line>(verse.getLines()), neededSignature));
+//            if (result.size() > 0) {
+//                break;
+//            }
         }
 
         return result;
     }
 
-    public String findVerse2(String phoneNumberSignature) {
-        List<Line> lines = lineRepo.findAll();
-        String signature = "";
-        Long lineId;
-        int counter;
-        List<String> verse = new ArrayList<>();
-
-        for (Line line : lines) {
-            signature = line.getSignature();
-            lineId = line.getId();
-            counter = 1;
-
-            while (signature.split("\\d+").length < 10) {
-                signature = String.join("_", signature, lines.get(lines.indexOf(line) + counter).getSignature());
-                counter++;
-            }
-
-            if (signature.startsWith(phoneNumberSignature)) {
-                verse.add(lineRepo.findById(lineId).get().getText());
-
-                for (int i = 0; i < counter - 1; i++) {
-                    verse.add(lineRepo.findById(lineId + i + 1).get().getText());
-                }
-                return String.join("\n", verse);
-            }
-        }
-        return "error";
-    }
+//    private DetectedVerseDto createDetectedVerseDto() {
+//
+//    }
 
     public String getSignature(String phoneNumber) {
         String[] strSplit = phoneNumber.split("");

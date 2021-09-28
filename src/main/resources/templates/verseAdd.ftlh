@@ -26,8 +26,8 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Language:</label>
                 <div class="col-sm-6">
-                    <label><input type="radio" name="language" value="english">English</label>
-                    <label><input type="radio" name="language" value="russian">Russian</label>
+                    <label><input type="radio" name="language" value="en">English</label>
+                    <label><input type="radio" name="language" value="ru">Russian</label>
                 </div>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
