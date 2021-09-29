@@ -107,13 +107,13 @@ public class VerseService {
         return result;
     }
 
-    public ArrayList<ArrayList<Line>> findVerse(String neededSignature/*, String language*/) {
-        List<Verse> verses = verseRepo.findAll();
-//        List<Verse> versesGivenLang = verseRepo.findVersesByLanguage(language);
+    public ArrayList<ArrayList<Line>> findVerse(String neededSignature, String language) {
+//        List<Verse> verses = verseRepo.findAll();
+        List<Verse> versesGivenLang = verseRepo.findByLanguage(language);
         ArrayList<ArrayList<Line>> result = new ArrayList<>();
         ArrayList<DetectedVerseDto> detectedVerses = new ArrayList<>();
 
-        for (Verse verse : verses) {
+        for (Verse verse : versesGivenLang) {
              result.addAll(findLinesWithSignature(new ArrayList<Line>(verse.getLines()), neededSignature));
 //            if (result.size() > 0) {
 //                break;

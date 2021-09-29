@@ -13,8 +13,8 @@
             <div>
                 <label class="col-form-label navbar-brand mt-3">Verse language</label>
                 <div>
-                    <label><input type="radio" name="language" value="english">English</label>
-                    <label><input type="radio" name="language" value="russian">Russian</label>
+                    <label><input type="radio" name="language" value="en">English</label>
+                    <label><input type="radio" name="language" value="ru">Russian</label>
                 </div>
             </div>
             <hr class="my-4">
