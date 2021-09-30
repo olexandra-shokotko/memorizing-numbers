@@ -8,7 +8,7 @@
         <form action="/find-verse" method="post">
             <div>
                 <label class="col-form-label navbar-brand mb-2">Enter phone number</label>
-                <input type="text" name="phoneNumber" class="form-control col-sm-7" placeholder="Phone number" />
+                <input type="text" name="number" class="form-control col-sm-7" placeholder="Phone number" />
             </div>
             <div>
                 <label class="col-form-label navbar-brand mt-3">Verse language</label>

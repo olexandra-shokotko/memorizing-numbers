@@ -6,16 +6,13 @@ import com.example.memorizingnumbers.repository.VerseRepo;
 import com.example.memorizingnumbers.service.VerseService;
 import jdk.nashorn.internal.objects.annotations.Property;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -57,26 +54,25 @@ public class VerseController {
         return "versesList";
     }
 
-//    @GetMapping("/result")
-//    public String resultVerse(Model model) {
-////        model.addAttribute("res", res);
-//        return "result";
-//    }
-
     @GetMapping("/find-verse")
     public String main() {
         return "main";
     }
 
     @PostMapping("/find-verse")
-    public String findVerse(@RequestParam String phoneNumber,
+    public String findVerse(@RequestParam String number,
                             @RequestParam String language,
-//                             @RequestParam String length,
+                            @RequestParam(value = "length", required = false) String length,
                              Model model) {
-        String signature = verseService.getSignature(phoneNumber);
-        ArrayList<ArrayList<Line>> result = verseService.findVerse(signature, language);
-//        ArrayList<Line> r = res.get(0);
+        boolean isCorrespond;
+
+        isCorrespond = length != null;
+
+        String signature = verseService.getSignature(number);
+        ArrayList<ArrayList<Line>> result = verseService.findVerse(signature, language, isCorrespond);
+
         model.addAttribute("result", result);
+        model.addAttribute("number", number);
 
         return "result";
     }

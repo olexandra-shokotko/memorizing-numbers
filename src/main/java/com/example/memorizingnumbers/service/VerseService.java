@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class VerseService {
@@ -73,7 +72,7 @@ public class VerseService {
         return wordsCounter >= numberOfWords ? result : null;
     }
 
-    private ArrayList<ArrayList<Line>> findLinesWithSignature(ArrayList<Line> lines, String signature) {
+    private ArrayList<ArrayList<Line>> findLinesWithSignature(ArrayList<Line> lines, String signature, boolean isCorrespond) {
         int numberOfWords;
         if (signature.length() == 1) {
             numberOfWords = 1;
@@ -107,30 +106,31 @@ public class VerseService {
         return result;
     }
 
-    public ArrayList<ArrayList<Line>> findVerse(String neededSignature, String language) {
-//        List<Verse> verses = verseRepo.findAll();
+    public ArrayList<ArrayList<Line>> findVerse(String neededSignature, String language, boolean isCorrespond) {
         List<Verse> versesGivenLang = verseRepo.findByLanguage(language);
         ArrayList<ArrayList<Line>> result = new ArrayList<>();
         ArrayList<DetectedVerseDto> detectedVerses = new ArrayList<>();
 
         for (Verse verse : versesGivenLang) {
-             result.addAll(findLinesWithSignature(new ArrayList<Line>(verse.getLines()), neededSignature));
-//            if (result.size() > 0) {
-//                break;
-//            }
+             result.addAll(findLinesWithSignature(new ArrayList<Line>(verse.getLines()), neededSignature, isCorrespond));
         }
 
         return result;
     }
 
-//    private DetectedVerseDto createDetectedVerseDto() {
-//
-//    }
+    public String getSignature(String number) {
+        String[] strSplit = number.split("");
+        ArrayList<String> numberArray = new ArrayList<String>(Arrays.asList(strSplit));
+        int i = 0;
 
-    public String getSignature(String phoneNumber) {
-        String[] strSplit = phoneNumber.split("");
-        ArrayList<String> phoneNumberArray = new ArrayList<String>(Arrays.asList(strSplit));
+        for (String num : numberArray) {
+            if (num.equals("0")) {
+                numberArray.set(i, "10");
+            }
+            i++;
+        }
 
-        return String.join("_", phoneNumberArray);
+        return String.join("_", numberArray);
     }
 }
+//6673635672653

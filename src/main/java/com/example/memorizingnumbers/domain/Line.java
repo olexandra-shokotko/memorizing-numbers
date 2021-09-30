@@ -34,6 +34,9 @@ public class Line {
     public String getText() {
         return text;
     }
+//    public String getLimitText(int len) {
+//        return "abc";
+//    }
 
     public void setText(String text) {
         this.text = text;
