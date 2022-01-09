@@ -9,14 +9,37 @@
                 <#list result as lines>
                     <div class="card my-3">
                         <div class="m-2">
+
+                            <#assign counter = 0>
+                            <#assign name></#assign>
+                            <#assign author></#assign>
+
                             <#list lines as line>
-                                <div style="font-weight:bold; font-size:10px; text-align:right">
-                                    ${line.verse.name + " - " + line.verse.author}
-                                </div>
-                                <span class="full-text" title="${line.verse.name + "\n" + line.verse.author}">${line.text}</span>
-<#--                                <span style="display: none" class="limit-text" title="${line.verse.name + "\n" + line.verse.author}">${line.limitText(3)}</span>-->
+                                <#assign items=line.text?trim?split(" ") >
+                                <#assign name=line.verse.name >
+                                <#assign author=line.verse.author >
+
+
+                                <#list items as item>
+                                    <#if item?matches("-")>
+                                        <#assign lengthNumber=lengthNumber+1>
+                                    </#if>
+
+                                    <#if counter < lengthNumber>
+                                        <span class="full-text" title="${line.verse.name + "\n" + line.verse.author}"><strong>${item}</strong></span>
+                                    <#else>
+                                        <span class="full-text" title="${line.verse.name + "\n" + line.verse.author}">${item}</span>
+                                    </#if>
+                                    <#assign counter = counter + 1>
+                                </#list>
                                 <br>
+
                             </#list>
+
+                            <div style="font-weight:bold; font-size:10px; text-align:right">
+                                ${name + " - " + author}
+                            </div>
+
                         </div>
                     </div>
                 </#list>

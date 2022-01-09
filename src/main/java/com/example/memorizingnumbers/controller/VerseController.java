@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 @Controller
-@PreAuthorize("hasAuthority('ADMIN')")
+@PreAuthorize("hasAuthority('USER')")
 public class VerseController {
     @Autowired
     private VerseService verseService;
@@ -73,6 +73,7 @@ public class VerseController {
 
         model.addAttribute("result", result);
         model.addAttribute("number", number);
+        model.addAttribute("lengthNumber", number.length());
 
         return "result";
     }
