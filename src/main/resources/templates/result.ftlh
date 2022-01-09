@@ -19,18 +19,16 @@
                                 <#assign name=line.verse.name >
                                 <#assign author=line.verse.author >
 
-
                                 <#list items as item>
-                                    <#if item?matches("-")>
-                                        <#assign lengthNumber=lengthNumber+1>
-                                    </#if>
 
                                     <#if counter < lengthNumber>
                                         <span class="full-text" title="${line.verse.name + "\n" + line.verse.author}"><strong>${item}</strong></span>
                                     <#else>
                                         <span class="full-text" title="${line.verse.name + "\n" + line.verse.author}">${item}</span>
                                     </#if>
-                                    <#assign counter = counter + 1>
+                                    <#if !item?matches("-")>
+                                        <#assign counter = counter + 1>
+                                    </#if>
                                 </#list>
                                 <br>
 

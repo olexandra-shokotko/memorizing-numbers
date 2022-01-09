@@ -111,8 +111,10 @@ public class VerseService {
         ArrayList<ArrayList<Line>> result = new ArrayList<>();
         ArrayList<DetectedVerseDto> detectedVerses = new ArrayList<>();
 
-        for (Verse verse : versesGivenLang) {
-             result.addAll(findLinesWithSignature(new ArrayList<Line>(verse.getLines()), neededSignature));
+        if (neededSignature.length() > 0) {
+            for (Verse verse : versesGivenLang) {
+                result.addAll(findLinesWithSignature(new ArrayList<Line>(verse.getLines()), neededSignature));
+            }
         }
 
         return result;

@@ -3,18 +3,18 @@
 
 <@c.page>
     <div class="jumbotron">
-        <div class="mb-1">Find a verse</div>
+        <h2 class="mb-1 display-5">Find a verse</h2>
 
         <form action="/find-verse" method="post">
             <div>
-                <label class="col-form-label navbar-brand mb-2">Enter phone number</label>
-                <input type="text" name="number" class="form-control col-sm-7" placeholder="Phone number" />
+                <label class="col-form-label navbar-brand mb-2">Enter number</label>
+                <input type="text" name="number" class="form-control col-sm-7" placeholder="Number" required pattern="^[0-9]+" maxlength="50"/>
             </div>
             <div>
                 <label class="col-form-label navbar-brand mt-3">Verse language</label>
                 <div>
                     <label><input type="radio" name="language" value="en">English</label>
-                    <label><input type="radio" name="language" value="ru">Russian</label>
+                    <label><input type="radio" name="language" value="ru" checked>Russian</label>
                 </div>
             </div>
 
