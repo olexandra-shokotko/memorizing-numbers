@@ -17,13 +17,6 @@
                     <label><input type="radio" name="language" value="ru">Russian</label>
                 </div>
             </div>
-            <hr class="my-4">
-
-            <div class="input-group-prepend">
-                <div>
-                    <label><input type="checkbox" name="length">The number of digits in the number corresponds to the number of words in the verse</label>
-                </div>
-            </div>
 
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
 

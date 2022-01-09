@@ -72,7 +72,7 @@ public class VerseService {
         return wordsCounter >= numberOfWords ? result : null;
     }
 
-    private ArrayList<ArrayList<Line>> findLinesWithSignature(ArrayList<Line> lines, String signature, boolean isCorrespond) {
+    private ArrayList<ArrayList<Line>> findLinesWithSignature(ArrayList<Line> lines, String signature) {
         int numberOfWords;
         if (signature.length() == 1) {
             numberOfWords = 1;
@@ -106,13 +106,13 @@ public class VerseService {
         return result;
     }
 
-    public ArrayList<ArrayList<Line>> findVerse(String neededSignature, String language, boolean isCorrespond) {
+    public ArrayList<ArrayList<Line>> findVerse(String neededSignature, String language) {
         List<Verse> versesGivenLang = verseRepo.findByLanguage(language);
         ArrayList<ArrayList<Line>> result = new ArrayList<>();
         ArrayList<DetectedVerseDto> detectedVerses = new ArrayList<>();
 
         for (Verse verse : versesGivenLang) {
-             result.addAll(findLinesWithSignature(new ArrayList<Line>(verse.getLines()), neededSignature, isCorrespond));
+             result.addAll(findLinesWithSignature(new ArrayList<Line>(verse.getLines()), neededSignature));
         }
 
         return result;
@@ -133,4 +133,3 @@ public class VerseService {
         return String.join("_", numberArray);
     }
 }
-//6673635672653

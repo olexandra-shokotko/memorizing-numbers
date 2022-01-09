@@ -62,14 +62,10 @@ public class VerseController {
     @PostMapping("/find-verse")
     public String findVerse(@RequestParam String number,
                             @RequestParam String language,
-                            @RequestParam(value = "length", required = false) String length,
-                             Model model) {
-        boolean isCorrespond;
-
-        isCorrespond = length != null;
+                            Model model) {
 
         String signature = verseService.getSignature(number);
-        ArrayList<ArrayList<Line>> result = verseService.findVerse(signature, language, isCorrespond);
+        ArrayList<ArrayList<Line>> result = verseService.findVerse(signature, language);
 
         model.addAttribute("result", result);
         model.addAttribute("number", number);
